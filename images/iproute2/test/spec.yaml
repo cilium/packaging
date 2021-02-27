@@ -43,3 +43,9 @@ commandTests:
   args: ["-V"]
   expectedOutput:
   - 'ss\ utility,\ iproute2-5.11.0\+cilium.0'
+
+- name: "tc is linked against libbpf"
+  command: "ldd"
+  args: ["/usr/local/bin/tc"]
+  expectedOutput:
+  - '/libbpf.so'
