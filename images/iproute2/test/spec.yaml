@@ -32,14 +32,14 @@ commandTests:
   command: "ip"
   args: ["-V"]
   expectedOutput:
-  - 'ip\ utility,\ iproute2-ss190107'
+  - 'ip\ utility,\ iproute2-5.11.0\+cilium.0'
 - name: "tc -V"
   command: "tc"
   args: ["-V"]
   expectedOutput:
-  - 'tc\ utility,\ iproute2-ss190107'
+  - 'tc\ utility,\ iproute2-5.11.0\+cilium.0'
 - name: "ss -V"
   command: "ss"
   args: ["-V"]
   expectedOutput:
-  - 'ss\ utility,\ iproute2-ss190107'
+  - 'ss\ utility,\ iproute2-5.11.0\+cilium.0'
