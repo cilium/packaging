@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2017-2020 Authors of Cilium
+# Copyright 2017-2021 Authors of Cilium
 # SPDX-License-Identifier: Apache-2.0
 
 set -o xtrace
@@ -14,7 +14,12 @@ cd /src/iproute2
 
 make distclean
 
-PKG_CONFIG="${triplet}-pkg-config" CC="${triplet}-gcc" AR="${triplet}-ar" ./configure
+LIBBPF_FORCE="on"					\
+PKG_CONFIG_PATH="/out/linux/arm64/lib64/pkgconfig"	\
+PKG_CONFIG="${triplet}-pkg-config --define-prefix"	\
+CC="${triplet}-gcc"					\
+AR="${triplet}-ar"					\
+./configure
 
 make -j "$(getconf _NPROCESSORS_ONLN)"
 

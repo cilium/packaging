@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2017-2020 Authors of Cilium
+# Copyright 2017-2021 Authors of Cilium
 # SPDX-License-Identifier: Apache-2.0
 
 set -o xtrace
@@ -8,7 +8,7 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-rev="cee19aa079794a7bdb3a64f414e88a6612a5b376"
+rev="28228d82c12d91d1d04ed614690c047f58f9f1bc" # static-data-v5.11
 
 # git clone https://github.com/cilium/iproute2 /src/iproute2
 # cd /src/iproute2
