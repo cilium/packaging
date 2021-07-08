@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright 2017-2020 Authors of Cilium
+# Copyright 2017-2021 Authors of Cilium
 # SPDX-License-Identifier: Apache-2.0
 
 set -o xtrace
@@ -10,6 +10,9 @@ set -o nounset
 
 cd /src/iproute2
 
+LIBBPF_FORCE="on"					\
+PKG_CONFIG_PATH="/out/linux/amd64/lib64/pkgconfig"	\
+PKG_CONFIG="pkg-config --define-prefix"			\
 ./configure
 
 make -j "$(getconf _NPROCESSORS_ONLN)"

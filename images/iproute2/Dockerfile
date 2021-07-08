@@ -9,6 +9,15 @@ ARG TESTER_IMAGE=quay.io/cilium/image-tester:6316b0f5606a69078bed1dd9f9c2b5685fe
 
 FROM --platform=linux/amd64 ${COMPILERS_IMAGE} as builder
 
+COPY checkout-libbpf.sh /tmp/checkout-libbpf.sh
+RUN /tmp/checkout-libbpf.sh
+
+COPY build-libbpf-native.sh /tmp/build-libbpf-native.sh
+RUN /tmp/build-libbpf-native.sh
+
+COPY build-libbpf-cross-aarch64.sh /tmp/build-libbpf-cross-aarch64.sh
+RUN /tmp/build-libbpf-cross-aarch64.sh
+
 COPY checkout-iproute2.sh /tmp/checkout-iproute2.sh
 RUN /tmp/checkout-iproute2.sh
 
@@ -29,6 +38,7 @@ RUN --mount=type=tmpfs,target=/var/cache/apt --mount=type=tmpfs,target=/var/lib/
     && apt-get install -y --no-install-recommends libelf1 libmnl0 \
     && apt-get purge --auto-remove -y
 
+COPY --from=builder /out/${TARGETPLATFORM}/lib64 /usr/lib
 COPY --from=builder /out/${TARGETPLATFORM}/bin /usr/local/bin
 COPY test /test/iproute2
 
